@@ -1,0 +1,17 @@
+<app-cards-wrapper>
+  <app-card *ngFor="let worker of workers$ | async; let i = index">
+    <div class="flex flex-column align-items-start">
+      <div>id: {{ worker?.id }}</div>
+      <div>name: {{ worker?.name }}</div>
+      <div>lastName: {{ worker?.lastName }}</div>
+      <!-- <div>organization: {{ worker?.name }}</div> -->
+      <button pButton
+        type="button"
+        label="Edit"
+        (click)="edit(worker)">
+      </button>
+    </div>
+  </app-card>
+</app-cards-wrapper>
+
+<router-outlet></router-outlet>

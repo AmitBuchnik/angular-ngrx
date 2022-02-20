@@ -1,0 +1,23 @@
+<app-cards-wrapper>
+  <app-card *ngFor="let organization of organizations$ | async; let i = index">
+    <div class="flex flex-column align-items-start">
+      <div>id: {{ organization?.id }}</div>
+      <div>name: {{ organization?.name }}</div>
+      <div class="flex justify-content-start">
+        <button pButton
+          style="margin-right: 1rem;"
+          type="button"
+          label="Show Workers"
+          (click)="showWorkers(organization?.id)">
+        </button>
+        <button pButton
+          type="button"
+          label="Add Worker"
+          (click)="addWorker(organization?.id)">
+        </button>
+      </div>
+    </div>
+  </app-card>
+</app-cards-wrapper>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,77 @@
+<p-dialog [(visible)]="display"
+  [header]="title"
+  [modal]="true"
+  (onHide)="onCloseDialog()"
+  #dialog
+  [style]="{width: '650px'}"
+  [showHeader]="true"
+  [closable]="true"
+  [maximizable]="false"
+  [resizable]="false"
+  [closeOnEscape]="false">
+
+  <div id="dialog-wrapper">
+    <form action=""
+      [formGroup]="reactiveForm"
+      (keydown.enter)="$event.preventDefault()"
+      (ngSubmit)="onSubmit()"
+      autocomplete="off">
+
+      <div class="flex form-wrapper">
+        <div class="flex flex-column">
+          <label for="name">Name</label>
+
+          <input id="name"
+            type="text"
+            class="form-control"
+            formControlName="name"
+            pInputText>
+
+          <label for="last-name">Last name</label>
+
+          <input id="last-name"
+            class="form-control"
+            type="text"
+            formControlName="lastName"
+            pInputText>
+
+          <label for="organizations">Organization</label>
+
+          <p-dropdown *ngIf="mode === Mode.update"
+            id="organizations"
+            appendTo="body"
+            placeholder="Select organization"
+            [options]="organizations"
+            class="form-control"
+            formControlName="organization"
+            optionLabel="name">
+          </p-dropdown>
+
+          <input *ngIf="mode === Mode.create"
+            id="organizations"
+            class="form-control"
+            type="text"
+            [readonly]="true"
+            [value]="reactiveForm?.value?.organization?.name"
+            pInputText>
+        </div>
+      </div>
+
+      <div class="flex flex-row-reverse">
+        <button type="button"
+          pButton
+          style="margin: 5px;"
+          (click)="onCancel()">
+          Cancel
+        </button>
+
+        <button type="submit"
+          pButton
+          style="margin: 5px;"
+          [disabled]="!reactiveForm?.valid">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</p-dialog>
